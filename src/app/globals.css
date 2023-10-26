@@ -91,3 +91,15 @@ body {
 .rs-slider {
   flex: 1
 }
+.button-copy {
+  z-index: 9999;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+.button-copy button {
+  background: #433dc7;
+  padding: 8px;
+  border-radius: 48px;
+  color: #fff;  
+}

@@ -4,7 +4,7 @@ import InfoPage from '@/components/InfoPage'
 import ListTab from '@/components/ListTab'
 import SectionCalculator from '@/components/SectionCalculator'
 import { useState } from 'react'
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
 interface Arglist {
   [index: string]: object;
   0: Function;
@@ -63,8 +63,6 @@ export default function Home() {
 
     return resultFinal;
   }
-
-
 
   function handleChangeValuesInputs(this: {[key: string]: string}, identifier: string, value: number): object { 
     const tabIdentifier = this.tabIdentifier.trim();
@@ -278,6 +276,17 @@ export default function Home() {
   }
 
   const infoTabSelected = infosTab[tabSelected];
+  const url = window.location.href;
+  const [copied, setCopied] = useState(false);
+  const iframeHTML = `<iframe src="${url}" width="100%" height="700"></iframe>`;
+ 
+  const otherCopy = () => {
+    setCopied(true);
+
+    setTimeout(() => {
+       setCopied(false);
+    }, 3000)
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-12">
@@ -290,6 +299,13 @@ export default function Home() {
           changeTab={changeTabHandler}
         />
       </section>      
+      <CopyToClipboard onCopy={otherCopy} text={iframeHTML}>
+        <div className='button-copy'>
+          {copied && <p>Iframe copyed</p>}
+          <button type='button'>Copy Iframe code HTML</button>
+        </div>          
+      </CopyToClipboard>
+      
     </main>
   )
 }
