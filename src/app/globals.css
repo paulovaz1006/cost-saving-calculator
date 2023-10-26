@@ -67,16 +67,26 @@ body {
 .tab-list li.active {
   border-bottom-color: #3c32aa;
 }
-.box-cost {
-  color:#00000042
+.box-cost p {
+   color: #959595;
+   font-size: 14px;
+   margin:16px 0
 }
+.cost-total {
+  color: #1d1d1d;  
+}
+
 .cost-total input {
   border-bottom: 2px solid #00000042;
+  font-size: 18px;
+  padding-left: 0!important;
+  cursor: text;
 }
 .link-info {
   color: #3c32aa;
   font-weight: bold;
   display: block;
+  font-size: 16px;
 }
 .rs-slider {
   flex: 1

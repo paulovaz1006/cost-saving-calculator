@@ -37,28 +37,36 @@ export default function Home() {
 
   const sumTotalCost = (items: {[key: string]: number}): number => {
     delete items['total']
-     console.log(items)
-
-
     const isValuEmpty = Object.values(items).indexOf(0) > -1;
-    if (isValuEmpty) {
-      return 0;
-    }
+
+    if (isValuEmpty) return 0;
     
     const quantityPercent1 = (items['quantityPatient'] * items['itemPercent1']) / 100;
     const quantityPercent2 = items['itemPercent2'] ? (quantityPercent1 * items['itemPercent2']) / 100 : quantityPercent1;
     const resultAvenue = quantityPercent2 * items['appointmentRevenue'];
     const result = (resultAvenue * 20) * 12;
 
-    console.log(result)
+    return result;
+  }
+  const sumTotalCostPhoneTag = (costs) => {
+    console.log(costs)
+    delete costs['total']
+    const isValuEmpty = Object.values(costs).indexOf(0) > -1;
 
-    //const total = Object.values(items).reduce((sumTotalCost, item) => sumTotalCost + item, 0);
+    if (isValuEmpty) return 0;
 
-    return result
+    const percentFallPatient = (costs['numberPatient'] * costs['average']) / 100;
+    const result1 = costs['percentageSpeakingClient'] / 60
+    const result2 = result1 * costs['hourlyStaffWage']
+    const result3 = (result2 * 20) * 12;
+    const resultFinal = result3 * percentFallPatient;
+
+    return resultFinal;
   }
 
-  function handleChangeValuesInputs(this: {[key: string]: string}, identifier: string, value: number): object {
-// @ts-ignore    
+
+
+  function handleChangeValuesInputs(this: {[key: string]: string}, identifier: string, value: number): object { 
     const tabIdentifier = this.tabIdentifier.trim();
     const currentValues = inputValues
     const newValues = {
@@ -68,7 +76,7 @@ export default function Home() {
 
     currentValues[tabIdentifier] = {
       ...newValues,
-      total: sumTotalCost(newValues)
+      total: tabIdentifier === 'phoneTag' ? sumTotalCostPhoneTag(newValues) : sumTotalCost(newValues)
     }
 
     setInputValues({
@@ -116,7 +124,7 @@ export default function Home() {
       },
       infoForm: {
         firstInput: {
-          label: "How many outbound patient calls does your practice make per day?",
+          label: "How many outbound patient calls doe syour practice made per day?",
           value: inputValues.phoneTag.numberPatient,
           placeholder: "Number Patient",
           identifier: 'numberPatient'
@@ -127,28 +135,28 @@ export default function Home() {
             value: inputValues.phoneTag.average,
             min: 0,
             textMin: '0',
-            max: 50,
-            textMax: '50',
+            max: 100,
+            textMax: '100%',
             identifier: 'average',
             step: 0.5
           },
           {
             label: "What is your average call length?",
             value: inputValues.phoneTag.percentageSpeakingClient,
-            min: 0,
-            textMin: '0',
-            max: 50,
-            textMax: '50',
+            min: 1,
+            textMin: '1min',
+            max: 10,
+            textMax: '10min',
             identifier: 'percentageSpeakingClient',
             step: 0.5
           },
           {
             label: "What is your hourly staff wage?",
             value: inputValues.phoneTag.hourlyStaffWage,
-            min: 0,
-            textMin: '$0',
-            max: 300,
-            textMax: '$300',
+            min: 10,
+            textMin: '$10',
+            max: 30,
+            textMax: '$30',
             identifier: 'hourlyStaffWage',
             step: 1
           }
@@ -176,37 +184,37 @@ export default function Home() {
       },
       infoForm: {
         firstInput: {
-          label: "How many inbound patient calls does your practice receive per day?",          
+          label: "How many outbound patient calls does your clinical trial site make per day?",          
           value: inputValues.abandonedCalls.quantityPatient,
           placeholder: "Number Patient",
           identifier: 'quantityPatient'
         },
         inputs: [
           {
-            label: "What percentage of those calls are abandoned?",
+            label: "What percentage of these calls are answered?",
             value: inputValues.abandonedCalls.itemPercent1,
             min: 0,
             textMin: '0',
             max: 50,
-            textMax: '50',
+            textMax: '50%',
             identifier: 'itemPercent1',
             step: 0.5
           },
             {
-            label: "How many calls relate to patient scheduling?",
+            label: "How many calls relate to needing to prescreen them?",
             value: inputValues.abandonedCalls.itemPercent2,
             min: 0,
             textMin: '0',
             max: 50,
-            textMax: '50',
+            textMax: '50%',
             identifier: 'itemPercent2',
             step: 0.5
           },
           {
-            label: "What is your average appointment revenue?",
+            label: "What is the average you pay your team per hour?",
             value: inputValues.abandonedCalls.appointmentRevenue,
-            min: 0,
-            textMin: '$0',
+            min: 100,
+            textMin: '$100',
             max: 300,
             textMax: '$300',
             identifier: 'appointmentRevenue',
@@ -243,22 +251,22 @@ export default function Home() {
         },
         inputs: [
           {
-            label: "What percentage of those appointments are no-shows?",
+            label: "How many patients on average does your site schedule?",
             value: inputValues.noShows.itemPercent1,
             min: 0,
             textMin: '0',
             max: 50,
-            textMax: '50',
+            textMax: '50%',
             identifier: 'itemPercent1',
             step: 0.5
           },
           {
-            label: "What is your average appointment revenue?",
+            label: "How much do you pay your staff an hour to try to reach out to them again? ",
             value: inputValues.noShows.appointmentRevenue,
-            min: 0,
-            textMin: '$0',
-            max: 300,
-            textMax: '$300',
+            min: 12,
+            textMin: '$12',
+            max: 25,
+            textMax: '$25',
             identifier: 'appointmentRevenue',
             step: 1
           }

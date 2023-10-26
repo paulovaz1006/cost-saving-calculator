@@ -14,7 +14,7 @@ type TInfoTab = {
   changeTab: any
 }
 const InfoTab = ({infosTab, changeTab}:TInfoTab) => (
-  <section className='max-w-xl'>
+  <section className='max-w-xl flex flex-col'>
     <InfoSection 
       title={infosTab.title}
       info={infosTab.info}
