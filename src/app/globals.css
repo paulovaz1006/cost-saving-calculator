@@ -1,11 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;600;700&family=Sofia&display=swap');
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  color: #1d1d1d;  
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Sofia', cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +20,64 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #1d1d1d;  
+  font-weight: 400;
+  
+  background: #fff;
+}
+
+* {  
+  font-family: Sofia Pro,sans-serif!important;
+}
+.section-info, .box-calculator {
+  color: #1d1d1d;
+}
+.section-info h3, .box-calculator h3 {
+  font-size: 40px;
+  font-weight: normal!important;
+}
+.section-info span {
+  background-color: #e8e8e8;
+}
+.section-info a {
+  height: 64px;
+  background-color: #3c32aa;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 22px 32px;
+  font-size: 18px;
+  line-height: 20px;
+  transition: box-shadow .2s,background-color .2s,color .2s;
+  display: inline-block;
+}
+.section-info a:hover {
+  text-decoration: none;
+  color:#fff
+}
+.tab-list li {
+  border-bottom: #bdbdbd 3px solid;
+}
+
+.tab-list li:hover {
+  border-bottom-color: #3c32aa;
+  color: #3c32aa;
+}
+
+.tab-list li.active {
+  border-bottom-color: #3c32aa;
+}
+.box-cost {
+  color:#00000042
+}
+.cost-total input {
+  border-bottom: 2px solid #00000042;
+}
+.link-info {
+  color: #3c32aa;
+  font-weight: bold;
+  display: block;
+}
+.rs-slider {
+  flex: 1
 }
