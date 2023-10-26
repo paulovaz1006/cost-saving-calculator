@@ -3,7 +3,7 @@
 import InfoPage from '@/components/InfoPage'
 import ListTab from '@/components/ListTab'
 import SectionCalculator from '@/components/SectionCalculator'
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { CopyToClipboard } from "react-copy-to-clipboard";
 interface Arglist {
   [index: string]: object;
@@ -276,10 +276,15 @@ export default function Home() {
   }
 
   const infoTabSelected = infosTab[tabSelected];
-  const url = window.location.href;
-  const [copied, setCopied] = useState(false);
-  const iframeHTML = `<iframe src="${url}" width="100%" height="700"></iframe>`;
  
+  
+  const [copied, setCopied] = useState(false);
+  const [urlLocal, setUrlLocal] = useState('');
+  const iframeHTML = `<iframe src="${urlLocal}" width="100%" height="700"></iframe>`;
+ useEffect(() => {
+   const url = window.location.href;
+    setUrlLocal(url)
+ }, [])
   const otherCopy = () => {
     setCopied(true);
 
