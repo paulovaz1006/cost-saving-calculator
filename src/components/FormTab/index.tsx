@@ -1,6 +1,11 @@
 import { Slider } from "rsuite";
 import 'rsuite/dist/rsuite.min.css';
-const FormTab = ({infosForm}) => (
+
+type TInfosForm = {
+  infosForm: any
+}
+
+const FormTab = ({infosForm}: TInfosForm) => (
   <form className="mt-6 text-sm">
     <div className="mb-8 cost-total">
       <label>{infosForm.firstInput.label}</label>  

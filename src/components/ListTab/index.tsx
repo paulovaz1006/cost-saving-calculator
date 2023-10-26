@@ -1,4 +1,8 @@
-const ListTab = ({clickHandler, tabSelected}) => (
+type TLisTab = {
+  clickHandler: any, 
+  tabSelected:string;
+}
+const ListTab = ({clickHandler, tabSelected}:TLisTab ) => (
   <ul className="tab-list justify-between flex">
     <li className={`text-center w-full cursor-pointer p-2 ${tabSelected === 'phoneTag' && 'active'}`} onClick={() => clickHandler('phoneTag')}>Phone tag</li>
     <li className={`text-center w-full cursor-pointer p-2 ${tabSelected === 'abandonedCalls' && 'active'}`} onClick={() => clickHandler('abandonedCalls')}>Abandoned calls</li>

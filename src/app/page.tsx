@@ -5,9 +5,14 @@ import ListTab from '@/components/ListTab'
 import SectionCalculator from '@/components/SectionCalculator'
 import { useState } from 'react'
 
+interface Arglist {
+  [index: string]: object;
+  0: Function;
+}
+
 export default function Home() {
   const [tabSelected, setTabSelected] = useState('phoneTag')  
-  const [inputValues, setInputValues] = useState({
+  const [inputValues, setInputValues] = useState<{[key: string]:{[key: string]: number}}>({
     phoneTag: {
       numberPatient:0,
       average: 0,
@@ -30,7 +35,7 @@ export default function Home() {
     }
   })  
 
-  const sumTotalCost = (items) => {
+  const sumTotalCost = (items: {[key: string]: number}): number => {
     delete items['total']
      console.log(items)
 
@@ -52,7 +57,8 @@ export default function Home() {
     return result
   }
 
-  function handleChangeValuesInputs(this, identifier, value) {
+  function handleChangeValuesInputs(this: {[key: string]: string}, identifier: string, value: number): object {
+// @ts-ignore    
     const tabIdentifier = this.tabIdentifier.trim();
     const currentValues = inputValues
     const newValues = {
@@ -68,16 +74,29 @@ export default function Home() {
     setInputValues({
       ...currentValues,      
     })
+
+    return currentValues
   }
 
-  const costTotal = inputValues[tabSelected].total.toString()
-  const formatTotal = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'}).format(costTotal)
+  const costTotal = inputValues[tabSelected].total;
+  const convertCurrency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'});
+  const formatTotal = convertCurrency.format(costTotal)
   
-  const changeTabHandler = (tabSelected) => {    
+  const changeTabHandler = (tabSelected: string) => {    
     setTabSelected(tabSelected)
   }
 
-  const infosTab = {
+  type TInfo = {
+    [key: string]: {
+      infoTab: {
+        title: string,
+        info: string,
+        links: object
+      },
+      infoForm: object,
+    }
+  }
+  const infosTab: TInfo = {
     phoneTag: {
       infoTab: {
         title: "How much is phone tag costing your practice?",
@@ -250,13 +269,15 @@ export default function Home() {
     }
   }
 
+  const infoTabSelected = infosTab[tabSelected];
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-12">
       <InfoPage />
       <section className="max-w-7xl w-full" id="calculator">
         <ListTab clickHandler={changeTabHandler} tabSelected={tabSelected}/>
         <SectionCalculator 
-          infosTab={infosTab[tabSelected]} 
+          infosTab={infoTabSelected} 
           costTotal={formatTotal}
           changeTab={changeTabHandler}
         />

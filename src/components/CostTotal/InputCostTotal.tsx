@@ -1,4 +1,6 @@
-const InputCostTotal = ({total}) => (
+import { ICostTotal } from "./ICostTotal";
+
+const InputCostTotal = ({total}: ICostTotal) => (
   <form className="cost-total">
     <label className="text-base block">Cost of phone tag per year*</label>
     <input 
