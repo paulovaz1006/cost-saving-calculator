@@ -55,13 +55,16 @@ export default function Home() {
 
     if (isValuEmpty) return 0;
 
-    const percentFallPatient = (costs['numberPatient'] * costs['average']) / 100;
-    const result1 = costs['percentageSpeakingClient'] / 60
-    const result2 = result1 * costs['hourlyStaffWage']
-    const result3 = (result2 * 20) * 12;
-    const resultFinal = result3 * percentFallPatient;
-
-    return resultFinal;
+    
+    const custoPorMinutoDaEquipe = costs['hourlyStaffWage'] / 60; 
+    const custoChamadasBemSucedida = custoPorMinutoDaEquipe * costs['percentageSpeakingClient']
+    
+    const quantidadeLigacaoBemSucedida = (costs['numberPatient'] * costs['average']) / 100;
+    const custoDiárioLigaçõesBemSucedidas = custoChamadasBemSucedida * quantidadeLigacaoBemSucedida
+    const result = custoDiárioLigaçõesBemSucedidas * 365
+    
+    
+    return result;
   }
 
   function handleChangeValuesInputs(this: {[key: string]: string}, identifier: string, value: number): object { 
@@ -276,7 +279,6 @@ export default function Home() {
   }
 
   const infoTabSelected = infosTab[tabSelected];
- 
   
   const [copied, setCopied] = useState(false);
   const [urlLocal, setUrlLocal] = useState('');
@@ -308,9 +310,8 @@ export default function Home() {
         <div className='button-copy'>
           {copied && <p>Iframe copyed</p>}
           <button type='button'>Copy Iframe code HTML</button>
-        </div>          
+        </div>  
       </CopyToClipboard>
-      
     </main>
   )
 }
