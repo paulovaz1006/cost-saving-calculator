@@ -1,5 +1,5 @@
-const TextTotalInfo = () => (
-  <p>*Results are based on the information you have provided in the Cost Calculator and cannot be guaranteed.</p>
+const TextTotalInfo = ({infoBottom}) => (
+  <p>{infoBottom}</p>
 )
 
 export default TextTotalInfo;

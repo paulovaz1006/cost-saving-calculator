@@ -63,7 +63,6 @@ export default function Home() {
     const custoDiárioLigaçõesBemSucedidas = custoChamadasBemSucedida * quantidadeLigacaoBemSucedida
     const result = custoDiárioLigaçõesBemSucedidas * 365
     
-    
     return result;
   }
 
@@ -100,6 +99,7 @@ export default function Home() {
       infoTab: {
         title: string,
         info: string,
+        infoBottom: string,
         links: object
       },
       infoForm: object,
@@ -110,6 +110,7 @@ export default function Home() {
       infoTab: {
         title: "How much is phone tag costing your practice?",
         info: "Playing phone tag with your patients is extremely frustrating for your medical practice’s staff — and even worse, it wastes time and money. Use this free calculator to uncover just how much revenue phone is costing your practice. If you don’t know the exact numbers for some or all of the inputs, use your best estimate.",
+        infoBottom: "*Results are based on the information you have provided in the Cost Calculator and cannot be guaranteed.",
         links: [
           {
             text: 'Calculate abandoned calls cost',
@@ -125,7 +126,7 @@ export default function Home() {
       },
       infoForm: {
         firstInput: {
-          label: "How many outbound patient calls doe syour practice made per day?",
+          label: "How many outbound patient calls does your site make per day?",
           value: inputValues.phoneTag.numberPatient,
           placeholder: "Number Patient",
           identifier: 'numberPatient'
@@ -170,6 +171,7 @@ export default function Home() {
       infoTab: {
         title: "How much is your practice losing from abandoned calls?",
         info: "If your staff is too busy to answer all incoming calls, your practice may be losing revenue due to patients abandoning calls. Use this free calculator to uncover just how much revenue abandoned calls are costing your practice. If you don’t know the exact numbers for some or all of the inputs, use your best estimate.",
+        infoBottom: "Cost of Abandoned Calls per Year*",
         links: [
           {
             text: 'Calculate phone tag cost',
@@ -202,7 +204,7 @@ export default function Home() {
             step: 0.5
           },
             {
-            label: "How many calls relate to needing to prescreen them?",
+            label: "How many of the outbound calls need to be prescreened?",
             value: inputValues.abandonedCalls.itemPercent2,
             min: 0,
             textMin: '0',
@@ -212,12 +214,12 @@ export default function Home() {
             step: 0.5
           },
           {
-            label: "What is the average you pay your team per hour?",
+            label: "What is the average hourly wage you pay your team?",
             value: inputValues.abandonedCalls.appointmentRevenue,
-            min: 100,
-            textMin: '$100',
-            max: 300,
-            textMax: '$300',
+            min: 12,
+            textMin: '$12',
+            max: 30,
+            textMax: '$30',
             identifier: 'appointmentRevenue',
             step: 1
           }
@@ -230,6 +232,7 @@ export default function Home() {
       infoTab: {
         title: "How much revenue are no-show appointments costing you?",
         info: "When patients don’t show up for their appointment, your practice is losing both revenue and time. Use this free calculator to uncover just how much revenue your practice is losing due to no-show appointments. If you don’t know the exact numbers for some or all of the inputs, use your best estimate.",
+         infoBottom: "*Results are based on the information you have provided in the Cost Calculator and cannot be guaranteed.",
         links: [
           {
             text: 'Calculate phone tag cost',
@@ -304,6 +307,7 @@ export default function Home() {
           infosTab={infoTabSelected} 
           costTotal={formatTotal}
           changeTab={changeTabHandler}
+          infoBottom={infoTabSelected.infoTab.infoBottom}
         />
       </section>      
       <CopyToClipboard onCopy={otherCopy} text={iframeHTML}>

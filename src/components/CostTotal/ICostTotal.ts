@@ -1,4 +1,5 @@
 export type ICostTotal = {
   total?: string,
-  costTotal?: string
+  costTotal?: string,
+  infoBottom?: string
 }
