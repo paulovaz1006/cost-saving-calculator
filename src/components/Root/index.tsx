@@ -16,7 +16,8 @@ export default function Root() {
   const [infoTabSelected] = useInfoTab(inputValues, handleChangeValuesInputs, tabSelected)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-12">      
+    <main className="flex min-h-screen flex-col items-center justify-between gap-6 p-12">
+      {/* <InfoPage /> */}
       <section className="max-w-7xl w-full" id="calculator">
         <ListTab 
           clickHandler={changeTabHandler} 
