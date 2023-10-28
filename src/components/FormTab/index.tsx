@@ -1,5 +1,5 @@
-import { Slider } from "rsuite";
 import 'rsuite/dist/rsuite.min.css';
+import SlideRate from "./SlideRate";
 
 type TInfosForm = {
   infosForm: any
@@ -21,15 +21,7 @@ const FormTab = ({infosForm}: TInfosForm) => (
         <label>{input.label}</label>  
         <div className="flex flex-row w-full justify-between items-center gap-4">
           <span>{input.textMin}</span>
-          <Slider 
-            min={input.min} 
-            max={input.max} 
-            step={input.step} 
-            barClassName="w-full"
-            progress
-            value={input.value}            
-            onChange={(e) => infosForm.changeInputs(input.identifier, e)}
-          />
+          <SlideRate input={input} infosForm={infosForm} />
           <span>{input.textMax}</span>
         </div>        
       </div>

@@ -4,13 +4,12 @@ type TLinkTab = {
   click: any
 }
 const LinkTab = ({textLink, link, click}: TLinkTab) => (
-  <a 
-    href={link} 
+  <button    
     className="mt-4  link-info"
     onClick={click}
   >
       {textLink} →
-  </a>
+  </button>
 )
 
 export default LinkTab;

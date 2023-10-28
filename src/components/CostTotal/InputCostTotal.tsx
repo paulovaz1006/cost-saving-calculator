@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { ICostTotal } from "./ICostTotal";
 
 const InputCostTotal = ({total}: ICostTotal) => (
@@ -13,4 +14,4 @@ const InputCostTotal = ({total}: ICostTotal) => (
   </form>
 )
 
-export default InputCostTotal;
+export default memo(InputCostTotal);

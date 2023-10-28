@@ -1,3 +1,4 @@
+import { memo } from "react";
 import InfoSection from "./InfoSection";
 import LinkTab from "./LinkTab";
 
@@ -31,4 +32,4 @@ const InfoTab = ({infosTab, changeTab}:TInfoTab) => (
   </section>
 )
   
-export default InfoTab;
+export default memo(InfoTab);

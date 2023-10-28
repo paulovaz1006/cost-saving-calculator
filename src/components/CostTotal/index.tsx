@@ -1,6 +1,7 @@
 import InputCostTotal from "./InputCostTotal";
 import TextTotalInfo from "./TextTotalInfo";
 import { ICostTotal } from "./ICostTotal";
+import { memo } from "react";
 
 const CostTotal = ({costTotal, infoBottom}:ICostTotal) => (
   <div className='flex flex-col w-full justify-items-start box-cost'>
@@ -9,4 +10,4 @@ const CostTotal = ({costTotal, infoBottom}:ICostTotal) => (
   </div>
 )
 
-export default CostTotal
+export default memo(CostTotal)
